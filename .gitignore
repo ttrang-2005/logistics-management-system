@@ -1,0 +1,24 @@
+# Bỏ qua thư viện nặng
+node_modules/
+**/node_modules/
+
+# Bỏ qua file build
+dist/
+build/
+
+# Bỏ qua file môi trường (chứa mật khẩu)
+.env
+
+# Bỏ qua dữ liệu Database (QUAN TRỌNG)
+mysql_data/
+mysql_data_fix_font/
+
+# Bỏ qua file hệ thống
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Bỏ qua file log
+*.log
+npm-debug.log*

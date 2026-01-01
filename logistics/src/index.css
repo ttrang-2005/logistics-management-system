@@ -1,0 +1,19 @@
+/* Reset CSS mặc định để Bootstrap hoạt động đúng */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #f8f9fa; /* Màu nền sáng */
+  color: #212529;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  /* Quan trọng: XÓA display: flex và place-items: center ở đây đi */
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # 1. Dịch vụ Database (MySQL)
+  mysql_db:
+    image: mysql:8.0
+    container_name: cita_mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cita_logistics
+    ports:
+      - "3307:3306" # Map cổng 3307 máy bạn -> 3306 docker (để tránh đụng localhost)
+    volumes:
+      - mysql_data:/var/lib/mysql # Lưu dữ liệu để không bị mất khi tắt
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql # Tự động chạy file db.sql khi khởi tạo lần đầu
+    networks:
+      - cita-network
+
+  # 2. Dịch vụ Backend (NodeJS)
+  server:
+    build: ./server
+    container_name: cita_server
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_HOST=mysql_db  # Tên service database ở trên
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=cita_logistics
+    depends_on:
+      - mysql_db
+    networks:
+      - cita-network
+
+  # 3. Dịch vụ Frontend (React + Nginx)
+  client:
+    build: ./logistics
+    container_name: cita_client
+    ports:
+      - "3000:80" # Chạy web ở cổng 3000
+    depends_on:
+      - server
+    networks:
+      - cita-network
+
+volumes:
+  mysql_data:
+
+networks:
+  cita-network:
+    driver: bridge
