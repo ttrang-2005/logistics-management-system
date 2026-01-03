@@ -33,7 +33,7 @@ Dự án đã được đóng gói hoàn chỉnh theo tiêu chuẩn DevOps. Bạ
 Clone repository này về máy tính hoặc tải file nén về giải nén:
 
 ```bash
-git clone https://github.com/Ten-Cua-Ban/cita-logistics.git
+git clone https://github.com/ttrang-2005/logistics-management-system.git
 cd cita-logistics
 ```
 
